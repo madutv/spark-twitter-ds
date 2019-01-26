@@ -96,6 +96,18 @@
         <version>3.3.2</version>
         <executions>
           <execution>
+            <id>Scaladoc</id>
+            <goals>
+              <goal>doc</goal>
+            </goals>
+            <phase>prepare-package</phase>
+            <configuration>
+              <args>
+                <arg>-no-link-warnings</arg>
+              </args>
+            </configuration>
+          </execution>
+          <execution>
             <goals>
               <goal>compile</goal>
               <goal>testCompile</goal>
@@ -127,7 +139,6 @@
           <junitxml>.</junitxml>
           <filereports>TestSuiteReport.txt</filereports>
           <!-- Comma separated list of JUnit test class names to execute -->
-          <jUnitClasses>samples.AppTest</jUnitClasses>
         </configuration>
         <executions>
           <execution>
