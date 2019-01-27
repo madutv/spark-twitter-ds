@@ -21,4 +21,8 @@ object TwitterConsts {
   lazy val NUM_PARTITIONS = "NUM_PARTITIONS"
   lazy val QUEUE_SIZE = "QUEUE_SIZE"
 
+  lazy val PRIMARY_DELIMITER = ","
+  lazy val SECONDARY_DELIMITER = ";"
+  lazy val PATH_DELIMITER = "->"
+
 }
