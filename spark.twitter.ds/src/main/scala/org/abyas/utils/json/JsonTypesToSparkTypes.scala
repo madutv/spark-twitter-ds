@@ -1,14 +1,13 @@
-package org.abyas.utils
+package org.abyas.utils.json
 
-import org.apache.spark.sql.types._
-import org.apache.spark.unsafe.types.UTF8String
 import org.apache.spark.sql.catalyst.InternalRow
 import org.apache.spark.sql.catalyst.util.{ArrayBasedMapData, ArrayData}
+import org.apache.spark.sql.types._
+import org.apache.spark.unsafe.types.UTF8String
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.node.JsonNodeType
-import com.fasterxml.jackson.databind.node.JsonNodeType._
-
+import com.fasterxml.jackson.databind.node.JsonNodeType.{ARRAY, BOOLEAN, NUMBER, OBJECT}
 
 /**
   * Helps converting JsonNode types to Spark Types

@@ -16,7 +16,6 @@ object TwitterConsts {
   lazy val LOCATIONS = "locations"
   lazy val LANGUAGES = "languages"
   lazy val TWITTER_COLUMNS = "columns"
-  lazy val FILTER_PROPERTY_FILE = "FILTER_PROPERTY_FILE"
 
   lazy val NUM_PARTITIONS = "NUM_PARTITIONS"
   lazy val QUEUE_SIZE = "QUEUE_SIZE"
