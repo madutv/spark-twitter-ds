@@ -1,0 +1,25 @@
+{
+  "num": 1234,
+  "str": "SomeStr",
+  "follow": [
+    123,
+    234,
+    1073403048012070000
+  ],
+  "track": [
+    "world",
+    "peace"
+  ],
+  "mapObj": {
+    "key": 124,
+    "key2": 234
+  },
+  "mapStruct": {
+    "key": 124,
+    "key2": "Value"
+  },
+  "mapArrayStruct": [
+     {"key": 124, "key2": "Value1"},
+     {"key": 124, "key2": "Value2"}
+  ]
+}
