@@ -7,7 +7,11 @@ import org.apache.spark.sql.types._
 /**
   * Class that stores Twitter Schema details
   */
-case class TwitterSchema(var Schema: StructType = StructType(StructField("twitter", StringType) :: Nil)) {
+//case class TwitterSchema(var schema: Option[StructType]) {
+
+object TwitterSchema {
+
+  var Schema: StructType = StructType(StructField("twitter", StringType) :: Nil)
 
   var schemaColumns: Array[String] = Schema.fieldNames
   var schemaTypes: Seq[DataType] = extractSchemaTypes().toSeq
