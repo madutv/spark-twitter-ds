@@ -5,10 +5,8 @@ import org.apache.spark.sql.types._
 
 
 /**
-  * Class that stores Twitter Schema details
+  * Object to stores Twitter Schema details
   */
-//case class TwitterSchema(var schema: Option[StructType]) {
-
 object TwitterSchema {
 
   var Schema: StructType = StructType(StructField("twitter", StringType) :: Nil)

@@ -13,7 +13,7 @@ object JavaToScalaImplicits {
     * Converts Java Optional of type A to Scala Option of type A
     * @param javaOpt: Java Optional to be converted to Option
     * @tparam A Type of Optional
-    * @return: Return Option[A]
+    * @return Return Option[A]
     */
   implicit def optionalToOption[A](javaOpt: Optional[A]): Option[A] = {
     if (javaOpt.isPresent) Some(javaOpt.get) else None
