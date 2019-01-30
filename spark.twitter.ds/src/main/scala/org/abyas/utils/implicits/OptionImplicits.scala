@@ -59,10 +59,10 @@ object OptionImplicits {
     * Option is None then an exception will be thrown
     *
     * @param opt : Option to convert to A
-    * @tparam A
+    * @tparam A Any
     */
   implicit class OptionAToAImplicit[A](opt: Option[A]) {
-    def getOrFail(msgOnFail: String = s"Failed while Converting ${opt} to value"): A = {
+    def getOrFail(msgOnFail: String = s"Failed while Converting $opt to value"): A = {
       opt match {
         case None => logger.error(msgOnFail + ": " + opt)
           throw new Exception(msgOnFail + ": " + opt)

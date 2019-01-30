@@ -1,6 +1,7 @@
 package org.abyas.twitter
 
 import org.apache.spark.sql.sources.v2.DataSourceOptions
+
 import twitter4j.conf.ConfigurationBuilder
 import twitter4j.{FilterQuery, TwitterStream, TwitterStreamFactory}
 
@@ -18,7 +19,14 @@ import org.abyas.utils.implicits.OptionImplicits.OptionStringImplicit
   * or languages are set.
   * 3) If columns are specified, creates an array of columns to be
   * extracted
-  * @param options
+  *
+  * @param options DataSourceOptions like:
+  *                twitter secret options:
+  *                 CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET
+  *                twitter filter options:
+  *                 follow, track, locations, languages
+  *                twitter columns to extract: columns
+  *                 NUM_PARTITIONS and QUEUE_SIZE
   */
 class TwitterOptions(options: DataSourceOptions) {
 
@@ -44,11 +52,11 @@ class TwitterOptions(options: DataSourceOptions) {
 
   //Twitter Columns
   private val ocolumns: Option[String] = options.get(TWITTER_COLUMNS)
-  private var columns: Array[String] = ocolumns.toStringArray(PRIMARY_DELIMITER)
+  private val columns: Array[String] = ocolumns.toStringArray(PRIMARY_DELIMITER)
 
   //Twitter Queue and Partitions
-  val numPartitions = options.get(NUM_PARTITIONS).orElse("5").toInt
-  val queueSize = options.get(QUEUE_SIZE).orElse("512").toInt
+  val numPartitions: Int = options.get(NUM_PARTITIONS).orElse("5").toInt
+  val queueSize: Int = options.get(QUEUE_SIZE).orElse("512").toInt
 
   /*
   Create Twitter Stream, Twitter Filter and Twitter Filter Columns
@@ -60,7 +68,6 @@ class TwitterOptions(options: DataSourceOptions) {
   /**
     * Creates TwitterStream based on Consumer key, secret, token and
     * token secret specified in spark read options
-    * @param options Options with twitter keys & secrets
     * @return TwitterStream if it was created successfully
     */
   def createTwitterStream(): TwitterStream = {

@@ -41,7 +41,7 @@ object StringImplicits {
       * Converts a delimited string of doubles to Array of Double. If the
       * conversion fails, an Exception will be thrown
       * @param delimiter: Delimiter to split on
-      * @return: Array of Double
+      * @return Array of Double
       */
     def toDoubleArray(delimiter: String): Array[Double] = {
       Try(str.split(delimiter).map(_.trim.toDouble)) match {
