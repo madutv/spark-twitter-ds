@@ -27,16 +27,15 @@ class TwitterStatusListener(tweetQueue: BlockingQueue[Seq[Any]]) extends StatusL
     val jval: JValue = parse(TwitterObjectFactory.getRawJSON(status))
     val colsAndSchema = (TwitterSchema.cols, TwitterSchema.schemaColumns)
     val tweetJson: Seq[Any] =
+
       colsAndSchema match {
          case(a, b) if a.isEmpty && b.head.equals("twitter") => Seq(UTF8String.fromString(compact(jval)))
-         case(_, b) =>
+         case(_, b) if b.length == 1 & b.head.equals("twitter") =>
            val aJval: Seq[JValue] = TwitterSchema.cols.map(a => JsonHelpers.extractNestedJvalsExact(jval, a)).toSeq
-           if(b.length == 1 & b.head.equals("twitter"))
-             Seq(UTF8String.fromString(compact(JArray(aJval.toList))))
-           else{
-             val aJNode: Seq[JsonNode] = aJval.map(j => asJsonNode(j))
-             JsonTypesToSparkTypes.matchJsonNodesToSparkTypes(TwitterSchema.Schema, aJNode)
-           }
+           Seq(UTF8String.fromString(compact(JArray(aJval.toList))))
+         case(a, b) =>
+           val aJNode: Seq[JsonNode] = TwitterSchema.cols.map(a => asJsonNode(JsonHelpers.extractNestedFirst(jval, a))).toSeq
+           JsonTypesToSparkTypes.matchJsonNodesToSparkTypes(TwitterSchema.Schema, aJNode)
       }
     tweetQueue.add(tweetJson)
   }

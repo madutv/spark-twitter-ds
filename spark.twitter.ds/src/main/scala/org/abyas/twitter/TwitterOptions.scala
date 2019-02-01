@@ -54,6 +54,7 @@ class TwitterOptions(options: DataSourceOptions) {
   private val ocolumns: Option[String] = options.get(TWITTER_COLUMNS)
   private val columns: Array[String] = ocolumns.toStringArray(PRIMARY_DELIMITER)
 
+
   //Twitter Queue and Partitions
   val numPartitions: Int = options.get(NUM_PARTITIONS).orElse("5").toInt
   val queueSize: Int = options.get(QUEUE_SIZE).orElse("512").toInt
@@ -106,7 +107,7 @@ class TwitterOptions(options: DataSourceOptions) {
     */
   def createTwitterFilterColumns(): Array[Array[String]] = {
     columns match {
-      case a if a.isEmpty => Array()
+      case a if a.isEmpty =>  Array()
       case a => a.map(v => v.toStringArray(PATH_DELIMITER))
     }
   }

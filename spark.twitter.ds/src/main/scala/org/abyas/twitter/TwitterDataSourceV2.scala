@@ -3,6 +3,7 @@ package org.abyas.twitter
 
 import java.util.Optional
 
+import org.abyas.twitter
 import org.apache.spark.sql.types.StructType
 import org.apache.spark.sql.sources.DataSourceRegister
 import org.apache.spark.sql.sources.v2.reader.streaming.MicroBatchReader
@@ -49,7 +50,14 @@ with DataSourceRegister with Logging {
     val twitterOptions: TwitterOptions = new TwitterOptions(options)
     TwitterSchema.setSchema(schema)
 
-    TwitterSchema.setRequestedColumns(twitterOptions.filterColumns)
+    val cols =
+      if(twitterOptions.filterColumns.isEmpty && !(TwitterSchema.schemaColumns.length == 1
+        && TwitterSchema.schemaColumns.head.equals("twitter")))
+            TwitterSchema.schemaColumns.map(a => Array(a))
+      else
+        twitterOptions.filterColumns
+
+    TwitterSchema.setRequestedColumns(cols)
 
     new TwitterMicroBatchReader(twitterOptions)
 
