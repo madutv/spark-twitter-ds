@@ -26,7 +26,7 @@ import org.abyas.utils.implicits.OptionImplicits.OptionStringImplicit
   *                twitter filter options:
   *                 follow, track, locations, languages
   *                twitter columns to extract: columns
-  *                 NUM_PARTITIONS and QUEUE_SIZE
+  *                 NUM_PARTITIONS, QUEUE_SIZE and TWITTER_POLL_TIMEOUT
   */
 class TwitterOptions(options: DataSourceOptions) {
 
@@ -57,6 +57,7 @@ class TwitterOptions(options: DataSourceOptions) {
   //Twitter Queue and Partitions
   val numPartitions: Int = options.get(NUM_PARTITIONS).orElse("5").toInt
   val queueSize: Int = options.get(QUEUE_SIZE).orElse("512").toInt
+  val qpoll: Int = options.get(TWITTER_POLL_TIMEOUT).orElse("5000").toInt
 
   /*
   Create Twitter Stream, Twitter Filter and Twitter Filter Columns

@@ -31,7 +31,8 @@ with DataSourceRegister with Logging {
     * twitter filter options:
     * follow, track, locations, languages
     * twitter columns to extract: columns
-    * NUM_PARTITIONS and QUEUE_SIZE
+    * NUM_PARTITIONS, QUEUE_SIZE and TWITTER_POLL_TIMEOUT
+    *
     *
     * @param schema Optional[StructType]. If provided, this will be used
     *               as StructType, otherwise a default StructType of StringType
@@ -47,9 +48,11 @@ with DataSourceRegister with Logging {
 
     val twitterOptions: TwitterOptions = new TwitterOptions(options)
     TwitterSchema.setSchema(schema)
+
     TwitterSchema.setRequestedColumns(twitterOptions.filterColumns)
 
     new TwitterMicroBatchReader(twitterOptions)
+
   }
 
 }
