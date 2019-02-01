@@ -19,6 +19,7 @@ object TwitterConsts {
 
   lazy val NUM_PARTITIONS = "NUM_PARTITIONS"
   lazy val QUEUE_SIZE = "QUEUE_SIZE"
+  lazy val TWITTER_POLL_TIMEOUT = "TWITTER_POLL_TIMEOUT"
 
   lazy val PRIMARY_DELIMITER = ","
   lazy val SECONDARY_DELIMITER = ";"

@@ -14,7 +14,7 @@ import org.abyas.utils.json.{JsonHelpers, JsonTypesToSparkTypes}
 
 /**
   * Implements Twitter's StatusListener
-  * @param tweetQueue
+  * @param tweetQueue Twitter Queue
   */
 class TwitterStatusListener(tweetQueue: BlockingQueue[Seq[Any]]) extends StatusListener {
   /**

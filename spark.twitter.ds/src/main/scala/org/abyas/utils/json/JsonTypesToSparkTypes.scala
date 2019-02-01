@@ -42,14 +42,15 @@ object JsonTypesToSparkTypes {
   def matchJsonNodeToSparkType(sparkType: DataType, jType: JsonNodeType, jnode: JsonNode): Any = {
     (sparkType, jnode.getNodeType, jnode) match {
       case(a: ArrayType, ARRAY, c) => jsonArrayToSparkArrayData(a, c)
-      case(_, ARRAY, _) => throw new Exception("Json Array should be mapped to ArrayType")
       case(a: MapType, OBJECT, c) => jsonObjectToSparkMapData(a, c)
       case(a: StructType, OBJECT, c) => jsonObjectToSparkInteralRow(a, c)
-      case(_, OBJECT, _) => throw new Exception("Json object should be mapped to MapType or StructType")
       case(LongType, NUMBER, c) => c.asLong()
       case(DoubleType, NUMBER, c) => c.asDouble()
       case(IntegerType, NUMBER, c) => c.asInt()
       case(BooleanType, BOOLEAN, c) => c.asBoolean()
+      case(StringType, _, c) => UTF8String.fromString(c.asText)
+      case(a, ARRAY, c) => throw new Exception("Json Array should be mapped to ArrayType")
+      case(a, OBJECT, c) => throw new Exception("Json object should be mapped to MapType or StructType")
       case(_, _, c) => UTF8String.fromString(c.asText)
     }
   }

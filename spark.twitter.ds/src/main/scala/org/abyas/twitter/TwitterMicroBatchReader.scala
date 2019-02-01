@@ -20,7 +20,7 @@ import twitter4j.TwitterStream
   *                      as part of spark.read. Options available are
   *                      CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET
   *                      follow, track, locations, languages, columns
-  *                      NUM_PARTITIONS, QUEUE_SIZE
+  *                      NUM_PARTITIONS, QUEUE_SIZE, TWITTER_POLL_TIMEOUT
   */
 class TwitterMicroBatchReader(twitterOptions: TwitterOptions) extends  MicroBatchReader{
 
@@ -62,17 +62,17 @@ class TwitterMicroBatchReader(twitterOptions: TwitterOptions) extends  MicroBatc
     twitterStream = twitterOptions.createTwitterStream()
     twitterStream.addListener(new TwitterStatusListener(tweetQueue))
 
-    worker = new Thread("Tweet Worker") {
-      setDaemon(true)
-      override def run(): Unit = {
-        receive()
-      }
-    }
-    worker.start()
-    twitterOptions.filterQuery match{
-      case None => twitterStream.sample("en")
-      case Some(a) => twitterStream.filter(a)
-    }
+     worker = new Thread("Tweet Worker") {
+       setDaemon(true)
+       override def run(): Unit = {
+         receive()
+       }
+     }
+     worker.start()
+     twitterOptions.filterQuery match{
+       case None => twitterStream.sample("en")
+       case Some(a) => twitterStream.filter(a)
+     }
   }
 
   /**
@@ -81,7 +81,7 @@ class TwitterMicroBatchReader(twitterOptions: TwitterOptions) extends  MicroBatc
     */
   private def receive(): Unit = {
     while(!stopped) {
-      val tweet: Seq[Any] = tweetQueue.poll(100, TimeUnit.MILLISECONDS)
+      val tweet: Seq[Any] = tweetQueue.poll(twitterOptions.qpoll, TimeUnit.MILLISECONDS)
       if(tweet != null) {
         tweetList.append(tweet)
         currentOffset = currentOffset + 1
@@ -157,6 +157,14 @@ class TwitterMicroBatchReader(twitterOptions: TwitterOptions) extends  MicroBatc
       catch {
         case e: Exception => println(e)
       }
+  }
+
+  /**
+    * Helper method to restart streaming
+    */
+  def start(): Unit = {
+    stopped = false
+    initialize()
   }
 
   /**
