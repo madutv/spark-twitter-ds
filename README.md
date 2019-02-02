@@ -1,3 +1,4 @@
+
 ## Twitter Streaming DataSource with Spark V2 DataSource
 
 ### Quick Usage
@@ -44,5 +45,3 @@ TODO
 ### Credits
 *	https://github.com/hienluu/wikiedit-streaming
 *  Apache Spark Socket Streaming
-
-
