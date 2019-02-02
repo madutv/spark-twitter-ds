@@ -18,7 +18,7 @@
 `ACCESS_TOKEN_SECRET:` Twitter Access Token Secret  
 
 #### _Twitter Filters_
-These options can be used to filter in specific tweets. This is acheived by constructing Twitter's FilterQuery. Any, all or none of these options may be provided. If none is provided, then sample tweets as provided by TwitterStream streamed. 
+These options can be used to filter in specific tweets. This is achieved by constructing Twitter's FilterQuery. Any, all or none of these options may be provided. If none is provided, then sample tweets as provided by TwitterStream streamed. 
 
 `follow:` Comma seperated user ids  
 `track:` Comma seperated list of tags/text  
