@@ -42,6 +42,3 @@ TODO
 TODO
 
 
-### Credits
-*	https://github.com/hienluu/wikiedit-streaming
-*  Apache Spark Socket Streaming
