@@ -4,10 +4,10 @@
 ### Quick Usage
 ```scala
 	spark.read
-		 .format("org.abyas.twitter")
-		 .options(Map[String, String]) //See Options section
-		 .schema(StructType) //optional. See Usage section
-		 .load()
+	     .format("org.abyas.twitter")
+	     .options(Map[String, String]) //See Options section
+	     .schema(StructType) //optional. See Usage section
+	     .load()
 ```
 
 ### Options
