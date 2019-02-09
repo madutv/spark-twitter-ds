@@ -271,6 +271,7 @@ items.writeStream
 
 ```
 
-
-
+#### References
+https://github.com/hienluu/wikiedit-streaming
+Spark Text Socket Streaming
 
