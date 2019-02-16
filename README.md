@@ -1,5 +1,5 @@
 
-## Twitter Streaming DataSource with Spark V2 DataSource
+## Spark Structured Streaming for Twitter
 
 ### Quick Usage
 ```scala
